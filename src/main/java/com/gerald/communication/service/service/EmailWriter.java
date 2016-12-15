@@ -11,11 +11,13 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.impl.DefaultAttachment;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Base64Utils;
 
 import com.gerald.communication.service.entities.MessageData;
 import com.sun.istack.ByteArrayDataSource;
 
+@Component("emailWriter")
 public class EmailWriter implements Processor{
 	
 	@Override
