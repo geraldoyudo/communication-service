@@ -34,6 +34,7 @@ public class EmailWriter implements Processor{
 		headers.put("emailProtocol", message.get("protocol", "smtp"));
 		headers.put("emailUsername", message.get("username"));
 		headers.put("emailPassword", message.get("password"));
+		headers.put("ContentType", message.get("contentType", "text/plain"));
 		headers.putAll(message.getProperties());
 		in.setBody(message.getBody());
 		in.setHeaders(headers);
