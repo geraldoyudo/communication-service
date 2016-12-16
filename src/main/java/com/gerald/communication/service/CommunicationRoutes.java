@@ -13,10 +13,13 @@ public class CommunicationRoutes extends RouteBuilder {
 	public void configure() throws Exception {
 		 from("servlet:///send?httpMethodRestrict=POST")
 	        .unmarshal().json(JsonLibrary.Jackson, MessageData.class)
-	        .recipientList(
-	        		simple("seda:${body.type}"))
-	        .ignoreInvalidEndpoints()
+	        .wireTap("seda:process")
 	        .transform().constant("OK");
+		 
+		 from("seda:process")
+		 .recipientList(
+	        		simple("seda:${body.type}"))
+		 .ignoreInvalidEndpoints();
 		
 	}
 
